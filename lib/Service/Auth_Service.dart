@@ -76,7 +76,7 @@ class AuthClass {
         (FirebaseAuthException exception) {
       showSnackBar(context, exception.toString());
     };
-    void Function(String verificationID, [int forceResnedingtoken]) codeSent =
+    void Function(String verificationID, [int? forceResnedingtoken]) codeSent =
         (String verificationID, [int? forceResnedingtoken]) {
       showSnackBar(context, "Verification Code sent on the phone number");
       setData(verificationID);

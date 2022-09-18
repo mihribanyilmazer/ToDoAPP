@@ -24,8 +24,7 @@ class AuthClass {
         idToken: googleSignInAuthentication?.idToken,
       );
       if (googleSignInAccount != null) {
-        UserCredential userCredential =
-            await _auth.signInWithCredential(credential);
+        UserCredential userCredential = await _auth.signInWithCredential(credential);
         storeTokenAndData(userCredential);
         Navigator.pushAndRemoveUntil(
             context,
@@ -33,7 +32,7 @@ class AuthClass {
             (route) => false);
 
         final snackBar =
-            SnackBar(content: Text(userCredential.user.displayName));
+            SnackBar(content: Text(userCredential.user?.displayName));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {
@@ -43,14 +42,14 @@ class AuthClass {
     }
   }
 
-  Future<void> signOut({required BuildContext context}) async {
+  Future<void> signOut({BuildContext? context}) async {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
       await storage.delete(key: "token");
     } catch (e) {
       final snackBar = SnackBar(content: Text(e.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context!).showSnackBar(snackBar);
     }
   }
 
